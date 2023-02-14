@@ -11,10 +11,10 @@ $.ajax({
 }).then(function (result) {
     console.log(result);
     var temp = result.list[0].main.temp;
-    console.log(temp);
+    console.log("Temp: " + temp + " °C");
     var wind = result.list[0].wind.speed;
-    console.log(wind);
+    console.log("Wind: " + wind + " KPH");
     var humidity = result.list[0].main.humidity;
-    console.log(humidity);
+    console.log("Humidity: " + humidity + "%");
 });
 
