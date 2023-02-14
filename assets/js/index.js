@@ -10,6 +10,9 @@ $.ajax({
     method: "GET"
 }).then(function (result) {
     console.log(result);
+    var iconCode = result.list[0].weather[0].icon
+    var icon = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    console.log(icon);
     var temp = result.list[0].main.temp;
     console.log("Temp: " + temp + " °C");
     var wind = result.list[0].wind.speed;
