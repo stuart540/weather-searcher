@@ -14,12 +14,16 @@ $.ajax({
     var city = result.city.name
     var unixTime = result.list[0].dt
     var dateToday = moment.unix(unixTime).format(" DD/MM/YYYY")
+    var cardTitle = $("<h3></h3>");
+    cardTitle.addClass("title");
+    cardTitle.text(city + dateToday);
     console.log(city + dateToday);
     
     var iconCode = result.list[0].weather[0].icon
     var weatherIcon = "http://openweathermap.org/img/w/" + iconCode + ".png";
     var displayIcon = $('<div id="iconContainer"><img id="iconIMG" src="" alt="Weather icon"></div>');
-    $("#today").append(displayIcon)
+    $("#today").append(cardTitle, displayIcon)
+    $("#iconContainer").append(displayIcon)
     $('#iconIMG').attr('src', weatherIcon);
 
     var temp = result.list[0].main.temp;
