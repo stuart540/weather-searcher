@@ -18,6 +18,7 @@ formSub.submit(function (event) {
     }).then(function (result) {
         console.log(result);
         
+        //* current weather
         // obtain city and date information and store into variables
         const city = result.city.name;
         const unixTime = result.list[0].dt;
@@ -66,3 +67,25 @@ formSub.submit(function (event) {
 
     });
 });
+
+//* 5 day Forecast
+
+    // create a loop to cycle through the response and obtain the forecast = weather[i * 8 - 1]
+
+    //dynamically render the information into #forecast-cards-[i]
+
+    // append the cards to $("#forecast") section
+
+//* Local storage
+
+    // store city name to local storage
+
+    //function to generate buttons from local storage 
+
+    //append buttons to $("#history")
+
+    //create listener for buttons - global listen with .target
+
+ //* Style it up to make it look pretty
+ 
+ //* Update README
