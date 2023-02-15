@@ -1,61 +1,68 @@
-var key = "8129706d5fbfcfb67a442f82bf57cab0";
-var cityName = "";
+// variables
+const key = "8129706d5fbfcfb67a442f82bf57cab0";
+const formSub = $("#search-form")
 
-var formSub = $("#search-form")
-
+// listener for search click 
 formSub.submit(function (event) {
     event.preventDefault();
     $("#today").empty();
     $("#forecast").empty();
-    cityName = $("#search-input").val().trim();
-    apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${key}&units=metric`;
+    const cityName = $("#search-input").val().trim();
+    const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${key}&units=metric`;
     console.log('query: ', apiURL)
 
-    // call to open weather map api
+    // call to openweathermap api
     $.ajax({
         url: apiURL,
         method: "GET"
     }).then(function (result) {
         console.log(result);
         
-        var city = result.city.name;
-        var unixTime = result.list[0].dt;
-        var dateToday = moment.unix(unixTime).format(" (DD/MM/YYYY)");
-        var todayCard = $('<div id="todayCard"></div>');
-        var cityTitle = $("<h2></h2>");
-        cityTitle.addClass("title");
-        cityTitle.text(city + dateToday);
+        // obtain city and date information and store into variables
+        const city = result.city.name;
+        const unixTime = result.list[0].dt;
+        const dateToday = moment.unix(unixTime).format(" (DD/MM/YYYY)");
+
+        //create elements to display city and date
+        const todayCard = $('<div id="todayCard"></div>');
+        const h2El = $("<h2></h2>");
+        h2El.addClass("title");
+        h2El.text(city + dateToday);
         
-        var iconCode = result.list[0].weather[0].icon;
-        var weatherIcon = "http://openweathermap.org/img/w/" + iconCode + ".png";
-        var displayIcon = $('<img id="iconIMG" src="" alt="Weather icon">');
+        // obtain icon and create imgEl to display
+        const iconCode = result.list[0].weather[0].icon;
+        const weatherIcon = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        const imgEl = $('<img id="iconIMG" src="" alt="Weather icon">');
+
+        // append elements to display
         $("#today").append(todayCard);
-        todayCard.append(cityTitle, displayIcon);
+        todayCard.append(h2El, imgEl);
         $('#iconIMG').attr('src', weatherIcon);
 
-        var tempRes = result.list[0].main.temp;
-        var tempText = "Temp: " + tempRes + " °C";
-        // var tempEL = $("<p></p>")
+        // obtain temp info and create pEl to display
+        const tempRes = result.list[0].main.temp;
+        const tempText = "Temp: " + tempRes + " °C";
+        
         $('<p/>',{
             text: tempText,
             class: 'temp-main'
-        }).appendTo('#todayCard');
+        }).appendTo(todayCard);
 
-        var windRes = result.list[0].wind.speed;
-        var windText = "Wind: " + windRes + " KPH";
+        // obtain wind info and create pEl to display
+        const windRes = result.list[0].wind.speed;
+        const windText = "Wind: " + windRes + " KPH";
         $('<p/>',{
             text: windText,
             class: 'wind-main'
-        }).appendTo('#todayCard');
+        }).appendTo(todayCard);
         
-        var humidityRes = result.list[0].main.humidity;
-        var humidityText = "Humidity: " + humidityRes + "%";
+        // obtain humidity info and create pEl to display
+        const humidityRes = result.list[0].main.humidity;
+        const humidityText = "Humidity: " + humidityRes + "%";
         $('<p/>',{
             text: humidityText,
             class: 'humidity-main'
-        }).appendTo('#todayCard');
-
-        // todayCard.append(temp, wind, humidity);
+        }).appendTo(todayCard);
 
     });
 });
