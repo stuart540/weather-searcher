@@ -41,8 +41,7 @@ formSub.submit(function (event) {
         $('#iconIMG').attr('src', weatherIcon);
 
         // obtain temp info and create pEl to display
-        const tempRes = result.list[0].main.temp;
-        const tempText = "Temp: " + tempRes + " °C";
+        const tempText = `Temp: ${result.list[0].main.temp} °C`;
         
         $('<p/>',{
             text: tempText,
@@ -50,16 +49,14 @@ formSub.submit(function (event) {
         }).appendTo(todayCard);
 
         // obtain wind info and create pEl to display
-        const windRes = result.list[0].wind.speed;
-        const windText = "Wind: " + windRes + " KPH";
+        const windText = `Wind; ${result.list[0].wind.speed} KPH`;
         $('<p/>',{
             text: windText,
             class: 'wind-main'
         }).appendTo(todayCard);
         
         // obtain humidity info and create pEl to display
-        const humidityRes = result.list[0].main.humidity;
-        const humidityText = "Humidity: " + humidityRes + "%";
+        const humidityText = `Humidity: ${result.list[0].main.humidity}%`;
         $('<p/>',{
             text: humidityText,
             class: 'humidity-main'
@@ -71,9 +68,9 @@ formSub.submit(function (event) {
             // create a loop to cycle through the response and obtain the 5 day forecast 
 
             for (let i = 7; i < result.list.length; i = i+=8) {
-                const forecastTemp = result.list[i].main.temp;
-                const forecastWind = result.list[i].wind.speed;
-                const forecastHumidity = result.list[i].main.humidity;
+                const forecastTemp = `Temp: ${result.list[i].main.temp} °C`;
+                const forecastWind = `Wind; ${result.list[i].wind.speed} KPH`;
+                const forecastHumidity = `Humidity: ${result.list[i].main.humidity}%`;
                 
                 console.log(forecastTemp);
                 console.log(forecastWind);
