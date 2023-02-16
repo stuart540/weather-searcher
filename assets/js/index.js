@@ -65,16 +65,25 @@ formSub.submit(function (event) {
             class: 'humidity-main'
         }).appendTo(todayCard);
 
+
+        //* 5 day Forecast
+        
+            // create a loop to cycle through the response and obtain the forecast = weather[i * 8 - 1]
+
+            for (let i = 7; i < result.list.length; i = i+=8) {
+                const forecastArr = result.list[i];
+                
+                console.log(forecastArr);
+            }
+            
+            //dynamically render the information into #forecast-cards-[i]
+        
+            // append the cards to $("#forecast") section
+
+
     });
 });
 
-//* 5 day Forecast
-
-    // create a loop to cycle through the response and obtain the forecast = weather[i * 8 - 1]
-
-    //dynamically render the information into #forecast-cards-[i]
-
-    // append the cards to $("#forecast") section
 
 //* Local storage
 
