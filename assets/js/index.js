@@ -68,12 +68,16 @@ formSub.submit(function (event) {
 
         //* 5 day Forecast
         
-            // create a loop to cycle through the response and obtain the forecast = weather[i * 8 - 1]
+            // create a loop to cycle through the response and obtain the 5 day forecast 
 
             for (let i = 7; i < result.list.length; i = i+=8) {
-                const forecastArr = result.list[i];
+                const forecastTemp = result.list[i].main.temp;
+                const forecastWind = result.list[i].wind.speed;
+                const forecastHumidity = result.list[i].main.humidity;
                 
-                console.log(forecastArr);
+                console.log(forecastTemp);
+                console.log(forecastWind);
+                console.log(forecastHumidity);
             }
             
             //dynamically render the information into #forecast-cards-[i]
