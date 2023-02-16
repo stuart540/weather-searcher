@@ -2,6 +2,11 @@
 const key = "8129706d5fbfcfb67a442f82bf57cab0";
 const formSub = $("#search-form")
 
+// Arrays to hold the forecast values
+const forecastTempArr = []
+const forecastWindArr = []
+const forecastHumidityArr = []
+
 // listener for search click 
 formSub.submit(function (event) {
     event.preventDefault();
@@ -65,18 +70,23 @@ formSub.submit(function (event) {
 
         //* 5 day Forecast
         
-            // create a loop to cycle through the response and obtain the 5 day forecast 
+            // create a loop to cycle through the response and obtain the 5 day forecast, then push values to arrays
 
             for (let i = 7; i < result.list.length; i = i+=8) {
                 const forecastTemp = `Temp: ${result.list[i].main.temp} °C`;
+                forecastTempArr.push(forecastTemp)
                 const forecastWind = `Wind; ${result.list[i].wind.speed} KPH`;
+                forecastWindArr.push(forecastWind)
                 const forecastHumidity = `Humidity: ${result.list[i].main.humidity}%`;
+                forecastHumidityArr.push(forecastHumidity)
                 
-                console.log(forecastTemp);
-                console.log(forecastWind);
-                console.log(forecastHumidity);
             }
             
+            console.log(forecastTempArr);
+            console.log(forecastWindArr);
+            console.log(forecastHumidityArr);
+
+
             //dynamically render the information into #forecast-cards-[i]
         
             // append the cards to $("#forecast") section
