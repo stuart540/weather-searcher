@@ -88,7 +88,12 @@ formSub.submit(function (event) {
 
 
             //dynamically render the information into #forecast-cards-[i]
-        
+
+            //create array of forecast dates from moment
+            const forecastDateArr = []
+        let date = moment.unix(unixTime + 86400).format(" DD/MM/YYYY");
+
+        console.log(date);
             // append the cards to $("#forecast") section
 
 
