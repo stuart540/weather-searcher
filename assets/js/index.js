@@ -3,9 +3,11 @@ const key = "8129706d5fbfcfb67a442f82bf57cab0";
 const formSub = $("#search-form")
 
 // Arrays to hold the forecast values
+const forecastIconArr =[]
 const forecastTempArr = []
 const forecastWindArr = []
 const forecastHumidityArr = []
+const forecastDateArr = []
 
 // listener for search click 
 formSub.submit(function (event) {
@@ -29,15 +31,14 @@ formSub.submit(function (event) {
         const unixTime = result.list[0].dt;
         const dateToday = moment.unix(unixTime).format(" (DD/MM/YYYY)");
 
-        //create elements to display city and date
+        //create elements to display city and date  
         const todayCard = $('<div id="todayCard"></div>');
         const h2El = $("<h2></h2>");
         h2El.addClass("title");
         h2El.text(city + dateToday);
         
         // obtain icon and create imgEl to display
-        const iconCode = result.list[0].weather[0].icon;
-        const weatherIcon = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        const weatherIcon = `http://openweathermap.org/img/w/${result.list[0].weather[0].icon}.png`;
         const imgEl = $('<img id="iconIMG" src="" alt="Weather icon">');
 
         // append elements to display
@@ -54,7 +55,7 @@ formSub.submit(function (event) {
         }).appendTo(todayCard);
 
         // obtain wind info and create pEl to display
-        const windText = `Wind; ${result.list[0].wind.speed} KPH`;
+        const windText = `Wind: ${result.list[0].wind.speed} KPH`;
         $('<p/>',{
             text: windText,
             class: 'wind-main'
@@ -70,31 +71,39 @@ formSub.submit(function (event) {
 
         //* 5 day Forecast
         
-            // create a loop to cycle through the response and obtain the 5 day forecast, then push values to arrays
+        // create a loop to cycle through the response and obtain the 5 day forecast, then push values to arrays
 
-            for (let i = 7; i < result.list.length; i = i+=8) {
-                const forecastTemp = `Temp: ${result.list[i].main.temp} °C`;
-                forecastTempArr.push(forecastTemp)
-                const forecastWind = `Wind; ${result.list[i].wind.speed} KPH`;
-                forecastWindArr.push(forecastWind)
-                const forecastHumidity = `Humidity: ${result.list[i].main.humidity}%`;
-                forecastHumidityArr.push(forecastHumidity)
-                
-            }
+        for (let i = 7; i < result.list.length; i = i+=8) {
+            const forecastIcon = `http://openweathermap.org/img/w/${result.list[i].weather[0].icon}.png`;
+            forecastIconArr.push(forecastIcon)
+            const forecastTemp = `Temp: ${result.list[i].main.temp} °C`;
+            forecastTempArr.push(forecastTemp)
+            const forecastWind = `Wind: ${result.list[i].wind.speed} KPH`;
+            forecastWindArr.push(forecastWind)
+            const forecastHumidity = `Humidity: ${result.list[i].main.humidity}%`;
+            forecastHumidityArr.push(forecastHumidity)
             
-            console.log(forecastTempArr);
-            console.log(forecastWindArr);
-            console.log(forecastHumidityArr);
+        }
+        
+        console.log(forecastIconArr);
+        console.log(forecastTempArr);
+        console.log(forecastWindArr);
+        console.log(forecastHumidityArr);
 
 
-            //dynamically render the information into #forecast-cards-[i]
+        //dynamically render the information into #forecast-cards-[i]
 
-            //create array of forecast dates from moment
-            const forecastDateArr = []
-        let date = moment.unix(unixTime + 86400).format(" DD/MM/YYYY");
+        //push 5 day forecast dates from moment into forecastDateArr
 
-        console.log(date);
-            // append the cards to $("#forecast") section
+        for (let j = 1; j < 6; j++) {
+          const date = moment.unix(unixTime + 86400 * [j]).format(" DD/MM/YYYY");
+          forecastDateArr.push(date)
+          
+        }
+          
+        console.log(forecastDateArr);
+        
+        // append the cards to $("#forecast") section
 
 
     });
