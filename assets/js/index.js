@@ -151,11 +151,15 @@ function searchHistory(location) {
 
 }
 
-console.log(localStorage.getItem("cityName"));
-
 const storage = JSON.parse(localStorage.getItem("cityName"))
-console.log(storage);
-searchHistory(storage);
+
+if (storage.length != 0) {
+
+  console.log(localStorage.getItem("cityName"));
+  
+  console.log(storage);
+  searchHistory(storage);
+}
 
 
 //create listener for buttons - global listen with .target
