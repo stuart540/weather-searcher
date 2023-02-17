@@ -85,56 +85,39 @@ formSub.submit(function (event) {
             
         }
         
-        console.log(forecastIconArr);
-        console.log(forecastTempArr);
-        console.log(forecastWindArr);
-        console.log(forecastHumidityArr);
-
-
-        //dynamically render the information into #forecast-cards-[i]
-
-        
-
-        //push 5 day forecast dates from moment into forecastDateArr
+        //* dynamically render the information into forecast-cards
 
         for (let j = 0; j < 5; j++) {
+                   
+          //create card and elements to display date and icon
           const date = moment.unix(unixTime + 86400 * [j+1]).format(" DD/MM/YYYY");
-          forecastDateArr.push(date)
-
-            //create elements to display date 
           const forecastCard = $('<div id="forecast-card"></div>');
           const h3El = $("<h3></h3>");
           const forecastImgEl = $(`<img id="iconIMG" src="${forecastIconArr[j]}" alt="Weather icon">`);
           h3El.addClass("title");
           h3El.text(date);
 
-            // append elements to display
+          // append the cards to $("#forecast") section
           $("#forecast").append(forecastCard);
           forecastCard.append(h3El, forecastImgEl);
-          // $('#iconIMG').attr('src', forecastIconArr[j]);
 
+          //create and render weather info to cards
           $('<p/>',{
             text: forecastTempArr[j],
             class: 'forecast-temp'
-        }).appendTo(forecastCard);
+          }).appendTo(forecastCard);
 
-        $('<p/>',{
-          text: forecastWindArr[j],
-          class: 'forecast-wind'
-      }).appendTo(forecastCard);
+          $('<p/>',{
+            text: forecastWindArr[j],
+            class: 'forecast-wind'
+          }).appendTo(forecastCard);
 
-      $('<p/>',{
-        text: forecastHumidityArr[j],
-        class: 'forecast-humidity'
-    }).appendTo(forecastCard);
+          $('<p/>',{
+            text: forecastHumidityArr[j],
+            class: 'forecast-humidity'
+          }).appendTo(forecastCard);
           
         }
-          
-        console.log(forecastDateArr);
-        
-        // append the cards to $("#forecast") section
-
-
     });
 });
 
