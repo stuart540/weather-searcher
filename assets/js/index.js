@@ -137,12 +137,16 @@ function searchHistory(location) {
 
   //function to generate buttons from local storage 
   const btnEl = $('<button class="history-button"></button>');
-  btnEl.text(location);
+  const local = localStorage.getItem("cityName")
+  btnEl.text(local);
   
   //append buttons to $("#history")
   $("#history").append(btnEl);
 
+
 }
+
+searchHistory(localStorage.getItem("cityName"))
 
 //create listener for buttons - global listen with .target
 
