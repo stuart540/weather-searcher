@@ -131,17 +131,20 @@ function getWeather(result) {
 //* Local storage
 
 function searchHistory(location) {
+  const historyArr = []
   
   // store city name to local storage
   localStorage.setItem("cityName", location);
 
   //function to generate buttons from local storage 
+  const btnContainer = $('<div class="button"></div>');
   const btnEl = $('<button class="history-button"></button>');
   const local = localStorage.getItem("cityName")
   btnEl.text(local);
   
   //append buttons to $("#history")
-  $("#history").append(btnEl);
+  btnContainer.append(btnEl);
+  $("#history").append(btnContainer);
 
 
 }
