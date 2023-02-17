@@ -7,6 +7,7 @@ const forecastTempArr = []
 const forecastWindArr = []
 const forecastHumidityArr = []
 const forecastDateArr = []
+const historyArr = []
 
 // listener for search click 
 formSub.submit(function (event) {
@@ -131,10 +132,11 @@ function getWeather(result) {
 //* Local storage
 
 function searchHistory(location) {
-  const historyArr = []
-  
+
+  console.log(historyArr);
+  historyArr.push(location)
   // store city name to local storage
-  localStorage.setItem("cityName", location);
+  localStorage.setItem("cityName", JSON.stringify(historyArr));
 
   //function to generate buttons from local storage 
   const btnContainer = $('<div class="button"></div>');
@@ -149,7 +151,12 @@ function searchHistory(location) {
 
 }
 
-searchHistory(localStorage.getItem("cityName"))
+console.log(localStorage.getItem("cityName"));
+
+const storage = JSON.parse(localStorage.getItem("cityName"))
+console.log(storage);
+searchHistory(storage);
+
 
 //create listener for buttons - global listen with .target
 
