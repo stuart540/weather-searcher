@@ -32,14 +32,14 @@ formSub.submit(function (event) {
         const dateToday = moment.unix(unixTime).format(" (DD/MM/YYYY)");
 
         //create elements to display city and date  
-        const todayCard = $('<div id="todayCard"></div>');
+        const todayCard = $('<div id="today-card"></div>');
         const h2El = $("<h2></h2>");
         h2El.addClass("title");
         h2El.text(city + dateToday);
         
         // obtain icon and create imgEl to display
-        const weatherIcon = `http://openweathermap.org/img/w/${result.list[0].weather[0].icon}.png`;
-        const imgEl = $('<img id="iconIMG" src="" alt="Weather icon">');
+        const weatherIcon = `https://openweathermap.org/img/w/${result.list[0].weather[0].icon}.png`;
+        const imgEl = $(`<img id="iconIMG" src="" alt="Weather icon">`);
 
         // append elements to display
         $("#today").append(todayCard);
@@ -71,10 +71,10 @@ formSub.submit(function (event) {
 
         //* 5 day Forecast
         
-        // create a loop to cycle through the response and obtain the 5 day forecast, then push values to arrays
+        // loop through response at every 8th value (24 hours), then push values to arrays
 
         for (let i = 7; i < result.list.length; i = i+=8) {
-            const forecastIcon = `http://openweathermap.org/img/w/${result.list[i].weather[0].icon}.png`;
+            const forecastIcon = `https://openweathermap.org/img/w/${result.list[i].weather[0].icon}.png`;
             forecastIconArr.push(forecastIcon)
             const forecastTemp = `Temp: ${result.list[i].main.temp} °C`;
             forecastTempArr.push(forecastTemp)
@@ -93,11 +93,40 @@ formSub.submit(function (event) {
 
         //dynamically render the information into #forecast-cards-[i]
 
+        
+
         //push 5 day forecast dates from moment into forecastDateArr
 
-        for (let j = 1; j < 6; j++) {
-          const date = moment.unix(unixTime + 86400 * [j]).format(" DD/MM/YYYY");
+        for (let j = 0; j < 5; j++) {
+          const date = moment.unix(unixTime + 86400 * [j+1]).format(" DD/MM/YYYY");
           forecastDateArr.push(date)
+
+            //create elements to display date 
+          const forecastCard = $('<div id="forecast-card"></div>');
+          const h3El = $("<h3></h3>");
+          const forecastImgEl = $(`<img id="iconIMG" src="${forecastIconArr[j]}" alt="Weather icon">`);
+          h3El.addClass("title");
+          h3El.text(date);
+
+            // append elements to display
+          $("#forecast").append(forecastCard);
+          forecastCard.append(h3El, forecastImgEl);
+          // $('#iconIMG').attr('src', forecastIconArr[j]);
+
+          $('<p/>',{
+            text: forecastTempArr[j],
+            class: 'forecast-temp'
+        }).appendTo(forecastCard);
+
+        $('<p/>',{
+          text: forecastWindArr[j],
+          class: 'forecast-wind'
+      }).appendTo(forecastCard);
+
+      $('<p/>',{
+        text: forecastHumidityArr[j],
+        class: 'forecast-humidity'
+    }).appendTo(forecastCard);
           
         }
           
