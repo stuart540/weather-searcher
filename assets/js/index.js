@@ -13,8 +13,9 @@ formSub.submit(function (event) {
   event.preventDefault();
   $("#today").empty();
   $("#forecast").empty();
-  const cityName = $("#search-input").val().trim();
-  openweathermapCall(cityName) 
+  const city = $("#search-input").val().trim();
+  openweathermapCall(city);
+  searchHistory(city);
 });
 
 function openweathermapCall(location) {
@@ -98,9 +99,9 @@ function getWeather(result) {
               
     //create card and elements to display date and icon
     const date = moment.unix(unixTime + 86400 * [j+1]).format(" DD/MM/YYYY");
-    const forecastCard = $('<div id="forecast-card"></div>');
+    const forecastCard = $('<div class="forecast-card"></div>');
     const h3El = $("<h3></h3>");
-    const forecastImgEl = $(`<img id="iconIMG" src="${forecastIconArr[j]}" alt="Weather icon">`);
+    const forecastImgEl = $(`<img class="forecast-icon" src="${forecastIconArr[j]}" alt="Forecast icon">`);
     h3El.addClass("title");
     h3El.text(date);
 
@@ -129,13 +130,21 @@ function getWeather(result) {
 
 //* Local storage
 
-    // store city name to local storage
+function searchHistory(location) {
+  
+  // store city name to local storage
+  localStorage.setItem("cityName", location);
 
-    //function to generate buttons from local storage 
+  //function to generate buttons from local storage 
+  const btnEl = $('<button class="history-button"></button>');
+  btnEl.text(location);
+  
+  //append buttons to $("#history")
+  $("#history").append(btnEl);
 
-    //append buttons to $("#history")
+}
 
-    //create listener for buttons - global listen with .target
+//create listener for buttons - global listen with .target
 
  //* Style it up to make it look pretty
  
