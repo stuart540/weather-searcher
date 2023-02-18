@@ -146,7 +146,6 @@ function checkStorage() {
 
 function addToStorage(location) {
 
-  // historyArr = [...storage]
   historyArr.push(location)
   // store city name to local storage
   localStorage.setItem("cityName", JSON.stringify(historyArr));
@@ -174,7 +173,8 @@ function createBtn(arr) {
 //create listener for buttons - global listen with .target
 
 $(".history-button").on("click",function(event){
-  console.log(this.textContent);
+  $("#today").empty();
+  $("#forecast").empty();
   openweathermapCall(this.textContent)
 })
 
