@@ -1,6 +1,7 @@
 header {
   text-align: center;
-  background-color: blue;
+  color: #F1F6F5;
+  background-color: #4B56D2;
   
 }
 
@@ -10,4 +11,20 @@ aside {
 
 section {
   width: 75%;
+}
+
+button {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 7px;
+  
+
+}
+
+.btn-search-button {
+  color: #F1F6F5;
+  background-color: #82C3EC;
 }
