@@ -1,7 +1,13 @@
+body {
+  margin: none;
+}
+
 header {
+  height: 15vh;
   text-align: center;
+  text-justify: center;
   color: #F1F6F5;
-  background-color: #4B56D2;
+  background-image: linear-gradient(to right, #4B56D2 , #472183);
   
 }
 
@@ -13,6 +19,15 @@ section {
   width: 75%;
 }
 
+input {
+  width: 60%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: medium;
+  color: rgb(91, 91, 91);
+}
+
 button {
   width: 100%;
   padding: 8px;
@@ -20,7 +35,8 @@ button {
   margin-top: 5px;
   margin-bottom: 5px;
   border-radius: 7px;
-  
+  color: rgb(91, 91, 91);
+  font-size: medium;
 
 }
 
