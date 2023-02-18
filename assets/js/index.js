@@ -173,6 +173,11 @@ function createBtn(arr) {
 
 //create listener for buttons - global listen with .target
 
+$(".history-button").on("click",function(event){
+  console.log(this.textContent);
+  openweathermapCall(this.textContent)
+})
+
  //* Style it up to make it look pretty
  
  //* Update README
