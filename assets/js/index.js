@@ -84,6 +84,9 @@ function getWeather(result) {
 
 
   //* 5 day Forecast
+
+  //display forecast header
+  $("h4").show();
   
   // loop through response at every 8th value (24 hours), then push values to arrays
 
