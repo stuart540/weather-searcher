@@ -8,6 +8,11 @@ const forecastWindArr = []
 const forecastHumidityArr = []
 const forecastDateArr = []
 const historyArr = []
+const storage = JSON.parse(localStorage.getItem("cityName"))
+
+//check local storage
+checkStorage()
+
 
 // listener for search click 
 formSub.submit(function (event) {
@@ -16,7 +21,7 @@ formSub.submit(function (event) {
   $("#forecast").empty();
   const city = $("#search-input").val().trim();
   openweathermapCall(city);
-  searchHistory(city);
+  addToStorage(city)
 });
 
 function openweathermapCall(location) {
@@ -120,7 +125,7 @@ function getWeather(result) {
       text: forecastWindArr[j],
       class: 'forecast-wind'
     }).appendTo(forecastCard);
-
+    
     $('<p/>',{
       text: forecastHumidityArr[j],
       class: 'forecast-humidity'
@@ -130,37 +135,41 @@ function getWeather(result) {
 
 
 //* Local storage
+function checkStorage() {
 
-function searchHistory(location) {
+  if (storage != null) {
+    historyArr.push(...storage)
+    createBtn(storage);
+  }
+  return historyArr
+}
 
-  console.log(historyArr);
+function addToStorage(location) {
+
+  // historyArr = [...storage]
   historyArr.push(location)
   // store city name to local storage
   localStorage.setItem("cityName", JSON.stringify(historyArr));
+  createBtn(historyArr)
 
+}
+
+function createBtn(arr) {
+  
   //function to generate buttons from local storage 
-  const btnContainer = $('<div class="button"></div>');
-  const btnEl = $('<button class="history-button"></button>');
-  const local = localStorage.getItem("cityName")
-  btnEl.text(local);
-  
-  //append buttons to $("#history")
-  btnContainer.append(btnEl);
-  $("#history").append(btnContainer);
 
+  arr.forEach(location => {
+    
+    const btnContainer = $('<div class="button"></div>');
+    const btnEl = $('<button class="history-button"></button>');
+    btnEl.text(location);
+    
+    //append buttons to $("#history")
+    btnContainer.append(btnEl);
+    $("#history").append(btnContainer);
 
+  });
 }
-
-const storage = JSON.parse(localStorage.getItem("cityName"))
-
-if (storage.length != 0) {
-
-  console.log(localStorage.getItem("cityName"));
-  
-  console.log(storage);
-  searchHistory(storage);
-}
-
 
 //create listener for buttons - global listen with .target
 
