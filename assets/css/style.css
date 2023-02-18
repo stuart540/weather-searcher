@@ -1,7 +1,4 @@
-body {
-  margin: none;
-}
-
+/* style the headder */
 header {
   height: 15vh;
   text-align: center;
@@ -11,14 +8,12 @@ header {
   
 }
 
+/* set the size of the search container */
 aside {
   width: 25%;
 }
 
-section {
-  
-}
-
+/* style the search form */
 input {
   width: 60%;
   padding: 8px;
@@ -28,6 +23,7 @@ input {
   color: rgb(91, 91, 91);
 }
 
+/* style the buttons */
 button {
   width: 100%;
   padding: 8px;
@@ -40,20 +36,24 @@ button {
 
 }
 
+/* over-write style the search button*/
 .btn-search-button {
   color: #F1F6F5;
   background-color: #82C3EC;
 }
 
+/* make the forecast display to the right of the buttons */
 .row {
   display: flex;
   justify-content: space-between;
 }
 
+/* set size of Forecast container */
 .mt-3 {
   width: 70vw;
 }
 
+/* make the forecast cards look pretty */
 .forecast-card {
   width: 12vw;
   padding-left: 10px;
