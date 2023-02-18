@@ -16,7 +16,7 @@ aside {
 }
 
 section {
-  width: 75%;
+  
 }
 
 input {
@@ -43,4 +43,21 @@ button {
 .btn-search-button {
   color: #F1F6F5;
   background-color: #82C3EC;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mt-3 {
+  width: 70vw;
+}
+
+.forecast-card {
+  width: 12vw;
+  padding-left: 10px;
+  border-radius: 7px;
+  background-color: #4B56D2;
+  font-size: large;
 }
