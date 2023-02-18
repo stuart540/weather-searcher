@@ -48,9 +48,14 @@ button {
   justify-content: space-between;
 }
 
-/* set size of Forecast container */
-.mt-3 {
+/* set size and styling of today container */
+#today {
   width: 70vw;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 7px;
+  padding-left: 10px;
+  margin-top: 20px;
 }
 
 /* make the forecast cards look pretty */
